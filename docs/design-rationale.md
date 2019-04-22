@@ -46,7 +46,7 @@ Below listed the design choices made following the program requirments
 *  Simple implementation
 
 
-** Disadvantages **
+**Disadvantages**
 * Add complexity to the overall design of the system
 * Hard to manage if parts of the rocket have more functions. Need better managing method in the future
 
