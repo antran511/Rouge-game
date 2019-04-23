@@ -50,3 +50,71 @@ Below listed the design choices made following the program requirments
 * Add complexity to the overall design of the system
 * Hard to manage if parts of the rocket have more functions. Need better managing method in the future
 
+## Keys
+
+**Design Choices**
+
+1. Create a class `Keys` which is the subclass of `Item` 
+2. `Keys` also combined with `DropItemAction` to make sure 
+player will get keys from dead enemies. 
+3. Once the player holds the key in the inventory list, `LockedDoor` will 
+change to open. 
+
+**Advantages**
+
+* `Keys` is the subclass of `Item` will make check key part easier to code. 
+* `Keys` is also extensible class E.g. unique key for each dorr
+
+**Disadvantages**
+
+* Add complexity to the overall design of the system. 
+
+
+## Door 
+
+**Design Choices**
+
+1. Using the class `LockedDoor` in the game engine. 
+2. `blocksThrownObjects()` will return true and `canActorEnter()` will return false at the beginning. 
+3. When Keys is checked, `blocksThrownObjects()` will return false and `canActorEnter()` will return true. 
+
+**Advantages**
+
+* No new class is created for the door make code more convenient. 
+
+**Disadvantages**
+
+* Add complexity to the overall design of the system. 
+
+## Goons 
+
+**Design Choices** 
+
+1. Create a new class Goons which is the subclass of Actor. 
+2. `Goons` class is combined with `AttackAction` and will attack player in the game(take more damage than Grunt). 
+3. `Goons` class is combined with `DropItemAction` and will have chance to drop keys when defeated. 
+
+**Advantages**
+
+* `Goons` class is similar as the `Grunt` class provided by game engine make it easier to code. 
+
+**Disadvantages**
+
+* Add complexity to the overall design of the system. 
+
+## Ninja 
+
+**Design Choices**
+
+1. Create a new class `Ninja` which is the subclass of `Actor`. 
+2. `Ninja` combined with `SkipTurnAction` and it attack will have chance to make player skip the next turn, which is the implemntation of stun
+3. `Ninja` combined with `DropItemAction` and it will have chance to drop keys when defeated. 
+
+**Advantages**
+
+* Create new class makes the character more extensible. 
+
+**Disadvantages** 
+
+* Add complexity to the overall design of the system. 
+
