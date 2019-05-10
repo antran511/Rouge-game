@@ -48,7 +48,6 @@ public class Application {
 
         Actor player = new Player("The Player", '@', 1, 100);
         world.addPlayer(player, gameMap, 3, 2);
-
         Bug bug = new Bug();
         bug.addItemToInventory(Item.newInventoryItem("rock", '*'));
         bug.actionFactories.add(new SpitBehaviour(player));
