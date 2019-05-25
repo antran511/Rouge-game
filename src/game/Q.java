@@ -8,7 +8,7 @@ public class Q extends Actor{
 	
 	// Q have 0 hitpoints and are always represented with a q
 	public Q(String name, Actor player) {
-		// Grunts have 0 hitpoints and are always represented with a q
+		// Q have 0 hitpoints and are always represented with a q
 		super(name, 'q', 2, 0);
 		// TODO Auto-generated constructor stub
 	}
@@ -18,6 +18,9 @@ public class Q extends Actor{
 	public Action playTurn(Actions actions, GameMap map, Display display) {
 		for (Action each: actions) {
 			if (each instanceof AttackAction) {
+				actions.remove(each);
+			}
+			if (each instanceof DropItemAction) {
 				actions.remove(each);
 			}
 		}

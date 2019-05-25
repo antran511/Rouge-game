@@ -24,6 +24,11 @@ public class Grunt extends Actor {
 
 	@Override
 	public Action playTurn(Actions actions, GameMap map, Display display) {
+		for (Action each: actions) {
+			if (each instanceof DropItemAction) {
+				actions.remove(each);
+			}
+		}
 		for (ActionFactory factory : actionFactories) {
 			Action action = factory.getAction(this, map);
 			if(action != null)

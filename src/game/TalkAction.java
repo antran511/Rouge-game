@@ -28,7 +28,7 @@ public class TalkAction extends Action{
 	 */
 	@Override
 	public String execute(Actor actor, GameMap map) {
-		String result = null;
+		String result = "I can give you something that will help, but I’m going to need the plans.";
 		for (Item item : actor.getInventory()) {
 			if (item instanceof RocketPlans) {
 				System.out.println("Hand them over, I don’t have all day");
