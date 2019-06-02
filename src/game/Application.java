@@ -23,14 +23,14 @@ public class Application {
 		World world = new World(new Display());
 
 		FancyGroundFactory groundFactory = new FancyGroundFactory(new Floor(), new Wall(), new LockedDoor(),
-				 new Crater());
+				 new Crater(), new WaterPool());
 		GameMap gameMap;
 
 		List<String> map = Arrays.asList(
 				".......................",
 				"....#####....######....",
 				"....#...#....#....#....",
-				"....#...+....#....#....",
+				".W..#...+....#....#....",
 				"....#####....##+###....",
 				".......................",
 				".......................",
@@ -55,9 +55,13 @@ public class Application {
 				"ooooooooooooooooooooooo");
 		GameMap mars = new GameMap(groundFactory, marsMap);
         world.addMap(mars);
-        
+		
 		Actor player = new StunnedPlayer("Player", '@', 1, 100);
 		world.addPlayer(player, gameMap, 2, 2);
+		
+		Actor yugomaxx = new Yugo(player);
+		yugomaxx.addSkill(DemoSkills.SPACETRAVELLER);
+		mars.addActor(yugomaxx, 10,10);
 		
 		Rocket rocket = new Rocket();
         rocket.getAllowableActions().add(new MoveActorAction(mars.at(7, 2), "to Mars!"));
@@ -66,7 +70,7 @@ public class Application {
         rocket2.getAllowableActions().add(new MoveActorAction(gameMap.at(1, 1), "to Earth!"));
         mars.addItem(rocket2, 7, 2);
       
-		RocketPad rocketPad = new RocketPad();
+        RocketPad rocketPad = new RocketPad();
 		rocketPad.getAllowableActions().add(new AssembleRocket(rocketPad, rocket));
         gameMap.addItem(rocketPad, 1, 1);
         
@@ -77,40 +81,48 @@ public class Application {
         Item oxyContainer = Item.newFurniture("Tank", 'y');
         oxyContainer.getAllowableActions().add(new FillOxyLevel(oxyContainer));
         Item oxyDispenser = Item.newFurniture("Dispenser", '&');
-        oxyDispenser.getAllowableActions().add(new PressButtonAction(oxyContainer));
+        oxyDispenser.getAllowableActions().add(new CreateTank(oxyContainer));
         gameMap.addItem(oxyDispenser, 6, 5);
-		//Grunt grunt = new Grunt("Mongo", player);
-		//gameMap.addActor(grunt, 0, 0);
-		//Grunt grunt2 = new Grunt("Norbert", player);
-		//gameMap.addActor(grunt2,  10, 10);
+        
+		Grunt grunt = new Grunt("Mongo", player);
+		gameMap.addActor(grunt, 0, 0);
+		Grunt grunt2 = new Grunt("Norbert", player);
+		mars.addActor(grunt2,  10, 9);
 		
-		//Goons goons = new Goons("Goons", player);
-		//gameMap.addActor(goons, 6, 6);
+		Goons goons = new Goons("Garlic", player);
+		gameMap.addActor(goons, 6, 6);
+		Goons goons2 = new Goons("Bumpy", player);
+		mars.addActor(goons2, 6, 6);
 		
-		//Q q = new Q("Q", player);
-		//gameMap.addActor(q, 10, 7);
+		Q q = new Q("Q", player);
+		gameMap.addActor(q, 10, 7);
 		
-		//Ninja ninja = new Ninja("Ninja", player );
-		//gameMap.addActor(ninja, 15, 0);
+		Ninja ninja = new Ninja("Naruto", player );
+		gameMap.addActor(ninja, 15, 0);
+		Ninja ninja2 = new Ninja("Sasuke", player );
+		mars.addActor(ninja2, 15, 0);
 		
-		//DoctorMaybe doctormaybe = new DoctorMaybe("Maybe Maybe", player);
-		//gameMap.addActor(doctormaybe, 5, 2);
+		DoctorMaybe doctormaybe = new DoctorMaybe("Maybe Maybe", player);
+		gameMap.addActor(doctormaybe, 5, 2);
 		
-		//Key key = new Key("key 1", 'k');
-		//grunt.addItemToInventory(key);
-		//Key key2 = new Key("key 2", 'k');
-		//grunt2.addItemToInventory(key2);
+		Key key = new Key("key 1", 'k');
+		grunt.addItemToInventory(key);
+		Key key2 = new Key("key 2", 'k');
+		goons.addItemToInventory(key2);
 		
 		RocketPlans rocketplans = new RocketPlans("Plans", 'p');
 		RocketBody rocketbody = new RocketBody("Body", 'b');
 		RocketEngine rocketengine = new RocketEngine("Engine", 'e');
-		player.addItemToInventory(rocketbody);
-		player.addItemToInventory(rocketengine);
-		//gameMap.addItem(rocketplans, 14, 2);
-		//q.addItemToInventory(rocketbody);
-		//doctormaybe.addItemToInventory(rocketengine);
 		
-	
+		gameMap.addItem(rocketplans, 14, 2);
+		q.addItemToInventory(rocketbody);
+		doctormaybe.addItemToInventory(rocketengine);
+		
+		WaterPistol waterpistol = new WaterPistol();
+		mars.addItem(waterpistol, 2, 2);
+		
+		
+		
 		
 		world.run();
 	}
