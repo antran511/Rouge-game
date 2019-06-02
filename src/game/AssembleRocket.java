@@ -4,13 +4,15 @@ import edu.monash.fit2099.engine.Action;
 import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.GameMap;
 import edu.monash.fit2099.engine.Item;
+import edu.monash.fit2099.engine.Location;
 
 public class AssembleRocket extends Action {
-	 
-	private Actor actor;
+	private RocketPad rocketPad;
+	private Rocket rocket;
 	private int haveParts;
-	public AssembleRocket(Actor actor) {
-		this.actor = actor;
+	public AssembleRocket(RocketPad rocketPad, Rocket rocket) {
+		this.rocketPad = rocketPad;
+		this.rocket = rocket;
 	}
 	/**
 	 * Assemble two parts of rocket
@@ -40,6 +42,8 @@ public class AssembleRocket extends Action {
 					actor.removeItemFromInventory(item);
 				}		
 			}
+		map.locationOf(actor).removeItem(rocketPad);
+		map.locationOf(actor).addItem(rocket);
 			return "Rocket successfully assembled";
 		}else {
 		return "You don't have enough parts to assemble ";

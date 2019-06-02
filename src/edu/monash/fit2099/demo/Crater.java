@@ -2,6 +2,7 @@ package edu.monash.fit2099.demo;
 
 import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.Ground;
+import game.StunnedPlayer;
 
 
 public class Crater extends Ground {
@@ -12,6 +13,7 @@ public class Crater extends Ground {
 	
 	@Override
 	public boolean canActorEnter(Actor a) {
-		return a.hasSkill(DemoSkills.SPACETRAVELLER);
+		return a.hasSkill(DemoSkills.SPACETRAVELLER) ;
 	}
+	
 }

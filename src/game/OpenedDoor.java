@@ -17,7 +17,7 @@ public class OpenedDoor extends Ground{
 	
 	@Override
 	public boolean blocksThrownObjects() {
-		return true;
+		return false;
 	}
 	
 }

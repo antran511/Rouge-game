@@ -1,13 +1,12 @@
 package game;
 
-
 import edu.monash.fit2099.engine.Item;
 
-public class RocketPad extends Item {
+public class Rocket extends Item {
 	
 	// Rocket Body is always represented with a b
-	public RocketPad() {
-		super("Rocket Pad", '~');
+	public Rocket() {
+		super("Rocket", '^');
 		super.getAllowableActions().clear();
 		// TODO Auto-generated constructor stub
 	}
